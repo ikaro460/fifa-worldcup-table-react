@@ -1,8 +1,7 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
 import { TableContext } from "./contexts/tableProvider";
-import { advanceRound } from "./utils/advanceRound";
-import { getTeamsFromApi } from "./utils/getTeamsFromApi";
+import { getTeamsFromApi, advanceRound } from "./utils/teamsUtils";
 
 function App() {
   const { table, setTable } = useContext(TableContext);

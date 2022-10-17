@@ -10,6 +10,10 @@ export const GroupsTable = () => {
     getTeamsFromApi(table, setTable);
   }, [sorted]);
 
+  useEffect(() => {
+    console.log(table);
+  }, [table]);
+
   return (
     <div>
       <h1>Groups stage</h1>

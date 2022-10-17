@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { TableContext } from "../contexts/tableProvider";
 import { api } from "../services/api";
 
+const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
 export const getTeamsFromApi = (table, setTable) => {
   console.log(table);
   return api
@@ -42,9 +44,14 @@ export const mountGroups = (table, setTable, separatedTeams) => {
   separatedTeams.map((group, index) => {
     console.log(table);
 
-    const newGroup = { group_id: index, teams: group };
-    setTable({ ...table, groups: { ...table.groups, newGroup } });
+    return (separatedTeams[index] = {
+      group_id: alphabet[index],
+      teams: group,
+    });
   });
+
+  console.log(separatedTeams);
+  setTable({ ...table, groups: separatedTeams });
 };
 
 export const advanceRound = (table, setTable) => {

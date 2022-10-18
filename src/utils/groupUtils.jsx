@@ -5,7 +5,6 @@ import { api } from "../services/api";
 const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 export const getTeamsFromApi = (table, setTable) => {
-  console.log(table);
   return api
     .get("", {
       headers: {
@@ -13,7 +12,6 @@ export const getTeamsFromApi = (table, setTable) => {
       },
     })
     .then((res) => {
-      console.log(res);
       if (res.data.Result !== undefined) {
         sortTeams(table, setTable, res.data.Result);
       }
@@ -36,21 +34,16 @@ export const separateGroups = (arr, numGroups, table, setTable) => {
     .fill("")
     .map((_, i) => arr.slice(i * perGroup, (i + 1) * perGroup));
 
-  console.log(separatedTeams);
   mountGroups(table, setTable, separatedTeams);
 };
 
 export const mountGroups = (table, setTable, separatedTeams) => {
   separatedTeams.map((group, index) => {
-    console.log(table);
-
     return (separatedTeams[index] = {
       group_id: alphabet[index],
       teams: group,
     });
   });
-
-  console.log(separatedTeams);
   setTable({ ...table, groups: separatedTeams });
 };
 

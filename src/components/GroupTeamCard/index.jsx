@@ -1,7 +1,7 @@
 export const GroupTeamCard = ({ team, index }) => {
   return (
     <tr>
-      <span>{index + 1}</span>
+      <td>{index + 1}</td>
       <td>{team.Name}</td>
       <td>{team.team_stats.Wins}</td>
       <td>{team.team_stats.Losses}</td>

@@ -4,20 +4,22 @@ import { api } from "../services/api";
 const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 export const getTeamsFromApi = (table, setTable) => {
-  return api
-    .get("", {
-      headers: {
-        "git-user": "ikaro460",
-      },
-    })
-    .then((res) => {
-      if (res.data.Result !== undefined) {
-        addPropsOnTeams(table, setTable, res.data.Result);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (!table.groups.length) {
+    api
+      .get("", {
+        headers: {
+          "git-user": "ikaro460",
+        },
+      })
+      .then((res) => {
+        if (res.data.Result !== undefined) {
+          addPropsOnTeams(table, setTable, res.data.Result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 
 export const addPropsOnTeams = (table, setTable, teams) => {

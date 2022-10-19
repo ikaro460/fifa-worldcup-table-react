@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import "./App.css";
-import { GroupComponent } from "./components/Groups";
 import { GroupsTable } from "./components/GroupsTable";
 import { TableContext } from "./contexts/tableProvider";
 import { advanceRound } from "./utils/groupUtils";

@@ -9,7 +9,7 @@ export const GroupsComponent = () => {
     <div>
       {table.groups.map((group, index) => {
         return (
-          <div>
+          <div key={index}>
             <h1>Group {group.group_id}</h1>
             <GroupCard group={group} />
           </div>

@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import { TableContext } from "../contexts/tableProvider";
 import { api } from "../services/api";
 
+//convert index number to letter array
 const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 export const getTeamsFromApi = (table, setTable) => {
@@ -13,6 +12,7 @@ export const getTeamsFromApi = (table, setTable) => {
     })
     .then((res) => {
       if (res.data.Result !== undefined) {
+        console.log(res);
         sortTeams(table, setTable, res.data.Result);
       }
     })

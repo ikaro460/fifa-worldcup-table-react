@@ -6,17 +6,15 @@ export const GroupsComponent = () => {
   const { table } = useContext(TableContext);
 
   return (
-    <ul>
+    <div>
       {table.groups.map((group, index) => {
         return (
-          <li key={index}>
-            <ul>
-              <h1>Group {group.group_id}</h1>
-              <GroupCard group={group} />
-            </ul>
-          </li>
+          <div>
+            <h1>Group {group.group_id}</h1>
+            <GroupCard group={group} />
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 };

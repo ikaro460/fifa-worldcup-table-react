@@ -8,7 +8,6 @@ export const GroupsTable = ({ group }) => {
 
   useEffect(() => {
     getTeamsFromApi(table, setTable);
-    console.log("oi");
   }, []);
 
   return (

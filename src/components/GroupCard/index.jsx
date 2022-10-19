@@ -1,6 +1,11 @@
+import { GroupTeamCard } from "../GroupTeamCard";
+
 export const GroupCard = ({ group }) => {
-  console.log(group);
   return group.teams.map((team, index) => {
-    return <li key={index}>{team.Name}</li>;
+    return (
+      <li key={index}>
+        <GroupTeamCard team={team} />
+      </li>
+    );
   });
 };

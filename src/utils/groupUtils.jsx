@@ -12,7 +12,6 @@ export const getTeamsFromApi = (table, setTable) => {
     })
     .then((res) => {
       if (res.data.Result !== undefined) {
-        console.log(res);
         addPropsOnTeams(table, setTable, res.data.Result);
       }
     })

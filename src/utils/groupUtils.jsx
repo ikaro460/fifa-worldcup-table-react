@@ -13,12 +13,28 @@ export const getTeamsFromApi = (table, setTable) => {
     .then((res) => {
       if (res.data.Result !== undefined) {
         console.log(res);
-        sortTeams(table, setTable, res.data.Result);
+        addPropsOnTeams(table, setTable, res.data.Result);
       }
     })
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const addPropsOnTeams = (table, setTable, teams) => {
+  const teamStats = {
+    Wins: 0,
+    Draws: 0,
+    Losses: 0,
+    Points: 0,
+    GF: 0,
+    GA: 0,
+    GD: 0,
+  };
+  teams.map((team) => {
+    return (team.team_stats = teamStats);
+  });
+  sortTeams(table, setTable, teams);
 };
 
 export const sortTeams = (table, setTable, teams) => {

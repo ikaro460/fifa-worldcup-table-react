@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { getTeamsFromApi } from "../../utils/groupUtils";
+import { GroupsComponent } from "../Groups";
 
-export const GroupsTable = () => {
+export const GroupsTable = ({ group }) => {
   const { table, setTable } = useContext(TableContext);
-  const [sorted, setSorted] = useState(false);
 
   useEffect(() => {
     getTeamsFromApi(table, setTable);
-  }, [sorted]);
+  }, []);
 
   return (
     <div>
       <h1>Groups stage</h1>
+      <GroupsComponent />
     </div>
   );
 };

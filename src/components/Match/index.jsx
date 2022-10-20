@@ -40,9 +40,25 @@ export const Match = () => {
       };
     });
 
-    setTable((current) => {
-      return (current.groups[group].teams[winner].team_stats.Wins.value = 3);
-    });
+    setTable((current) => ({
+      ...current,
+      groups: [
+        ...current.groups,
+        {
+          ...current.groups[group],
+          teams: {
+            ...current.groups[group].teams,
+            [team1]: {
+              ...current.groups[group].teams[team1],
+              team_stats: {
+                ...current.groups[group].teams[team1].team_stats,
+                Wins: 3,
+              },
+            },
+          },
+        },
+      ],
+    }));
   };
   console.log(table);
 

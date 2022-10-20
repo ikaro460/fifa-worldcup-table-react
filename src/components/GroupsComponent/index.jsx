@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { TableContext } from "../../contexts/tableProvider";
+import { alphabet } from "../../utils/groupUtils";
 import { GroupCard } from "../GroupCard";
 
 export const GroupsComponent = () => {
@@ -7,11 +8,11 @@ export const GroupsComponent = () => {
 
   return (
     <div>
-      {Object.entries(table.groups).map(([key, value]) => {
+      {table.groups.map((group, index) => {
         return (
-          <div key={key}>
-            <h1>Group {key.toUpperCase()}</h1>
-            <GroupCard group={value} />
+          <div key={index}>
+            <h1>Group {alphabet[index]}</h1>
+            <GroupCard group={group} />
           </div>
         );
       })}

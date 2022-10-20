@@ -1,5 +1,6 @@
 //SIMULAR PARTIDAS ->
 
+import produce from "immer";
 import { useContext } from "react";
 import { MatchesContext } from "../../contexts/matchProvider";
 import { TableContext } from "../../contexts/tableProvider";
@@ -21,6 +22,8 @@ export const Match = () => {
         ? team1
         : team2;
 
+    const looser = winner === team1 ? team2 : team1;
+
     const results = {
       group_id: table.groups[group].group_id,
       team_1: table.groups[group].teams[team1].Name,
@@ -30,41 +33,23 @@ export const Match = () => {
       winner: winner,
     };
 
-    setMatches((current) => {
-      console.log(table.groups[group].teams[winner]);
-      return {
-        ...current,
-        group_stage: current.group_stage
-          ? [...current.group_stage, results]
-          : [results],
-      };
+    const newMatches = produce(matches, (draft) => {
+      draft.group_stage.results.push(results);
     });
+    setMatches(newMatches);
 
-    setTable((current) => ({
-      ...current,
-      groups: [
-        ...current.groups,
-        {
-          ...current.groups[group],
-          teams: {
-            ...current.groups[group].teams,
-            [team1]: {
-              ...current.groups[group].teams[team1],
-              team_stats: {
-                ...current.groups[group].teams[team1].team_stats,
-                Wins: 3,
-              },
-            },
-          },
-        },
-      ],
-    }));
+    const newTable = produce(table, (draft) => {
+      draft.groups[group].teams[winner].team_stats.Wins += 1;
+      draft.groups[group].teams[winner].team_stats.Points += 3;
+    });
+    setTable(newTable);
   };
-  console.log(table);
 
   return (
     <div>
-      <button onClick={() => simulateMatch(0, 0, 1)}>Advance Round</button>
+      <button onClick={() => simulateMatch("0", "0", "1")}>
+        Advance Round
+      </button>
     </div>
   );
 };

@@ -15,7 +15,9 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => console.log(table)}>Show table on console</button>
+      <button onClick={() => console.log(table, matches)}>
+        Show table on console
+      </button>
       <Match />
       <GroupsTable />
     </div>

@@ -1,18 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./App.css";
 import { GroupsTable } from "./components/GroupsTable";
+import { Match } from "./components/Match";
+import { MatchesContext } from "./contexts/matchProvider";
 import { TableContext } from "./contexts/tableProvider";
-import { advanceRound } from "./utils/groupUtils";
 
 function App() {
-  const { table, setTable } = useContext(TableContext);
+  const { table } = useContext(TableContext);
+  const { matches } = useContext(MatchesContext);
+
+  useEffect(() => {
+    console.log(matches);
+  }, [matches]);
 
   return (
     <div className="App">
       <button onClick={() => console.log(table)}>Show table on console</button>
-      <button onClick={() => advanceRound(table, setTable)}>
-        Advance Round
-      </button>
+      <Match />
       <GroupsTable />
     </div>
   );

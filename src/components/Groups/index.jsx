@@ -7,11 +7,11 @@ export const GroupsComponent = () => {
 
   return (
     <div>
-      {table.groups.map((group, index) => {
+      {Object.entries(table.groups).map(([key, value]) => {
         return (
-          <div key={index}>
-            <h1>Group {group.group_id}</h1>
-            <GroupCard group={group} />
+          <div key={key}>
+            <h1>Group {key.toUpperCase()}</h1>
+            <GroupCard group={value} />
           </div>
         );
       })}

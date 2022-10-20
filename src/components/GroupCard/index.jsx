@@ -14,8 +14,8 @@ export const GroupCard = ({ group }) => {
         </tr>
       </thead>
       <tbody>
-        {group.teams.map((team, index) => {
-          return <GroupTeamCard team={team} key={index} index={index} />;
+        {Object.entries(group.teams).map(([key, value]) => {
+          return <GroupTeamCard team={value} key={key} index={key} />;
         })}
       </tbody>
     </table>

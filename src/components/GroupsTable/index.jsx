@@ -1,30 +1,28 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { api } from "../../services/api";
 import { GroupsComponent } from "../Groups";
+import { alphabet } from "../../utils/groupUtils";
 
 export const GroupsTable = () => {
   const { table, setTable } = useContext(TableContext);
-
-  const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+  const [mounted, setMounted] = useState(false);
 
   const getTeamsFromApi = () => {
-    if (!table.groups.length) {
-      api
-        .get("", {
-          headers: {
-            "git-user": "ikaro460",
-          },
-        })
-        .then((res) => {
-          if (res.data.Result !== undefined) {
-            addPropsOnTeams(res.data.Result);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    api
+      .get("", {
+        headers: {
+          "git-user": "ikaro460",
+        },
+      })
+      .then((res) => {
+        if (res.data.Result !== undefined) {
+          addPropsOnTeams(res.data.Result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const addPropsOnTeams = (teams) => {
@@ -63,10 +61,29 @@ export const GroupsTable = () => {
     separatedTeams.map((group, index) => {
       return (separatedTeams[index] = {
         group_id: alphabet[index],
-        teams: group,
+        teams: { ...group },
       });
     });
-    setTable({ ...table, groups: separatedTeams });
+
+    //deestructuring array to object
+    const groupsObj = separatedTeams.reduce(
+      (a, v, index) => ({ ...a, [alphabet[index]]: v }),
+      {}
+    );
+
+    if (!localStorage.getItem("teamsArray") == true) {
+      //save teamsArray to local storage
+      const teamsStorage = JSON.stringify(groupsObj);
+      localStorage.clear();
+      localStorage.setItem("teamsArray", teamsStorage);
+
+      //update table state
+      setTable({ ...table, groups: groupsObj });
+    } else {
+      //get array from local storage
+      const teamsStorage = JSON.parse(localStorage.getItem("teamsArray"));
+      setTable({ ...table, groups: teamsStorage });
+    }
   };
 
   const advanceRound = () => {
@@ -74,7 +91,10 @@ export const GroupsTable = () => {
   };
 
   useEffect(() => {
-    getTeamsFromApi();
+    if (!mounted) {
+      getTeamsFromApi();
+      setMounted(true);
+    }
   }, [table, setTable]);
 
   return (

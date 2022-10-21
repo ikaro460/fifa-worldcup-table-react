@@ -1,6 +1,11 @@
 import { GroupTeamCard } from "../GroupTeamCard";
 
 export const GroupCard = ({ group }) => {
+  const auxArr = [...group.teams];
+
+  const sortedArr = auxArr.sort((a, b) => {
+    return b.team_stats.Points - a.team_stats.Points;
+  });
   return (
     <table>
       <thead>
@@ -14,7 +19,7 @@ export const GroupCard = ({ group }) => {
         </tr>
       </thead>
       <tbody>
-        {group.teams.map((team, index) => {
+        {sortedArr.map((team, index) => {
           return <GroupTeamCard team={team} key={index} index={index} />;
         })}
       </tbody>

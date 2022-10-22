@@ -68,10 +68,6 @@ export const Groups = () => {
     setTable({ ...table, groups: separatedTeams });
   };
 
-  const advanceRound = () => {
-    return setTable({ ...table, current_round: table.current_round + 1 });
-  };
-
   useEffect(() => {
     if (!mounted) {
       getTeamsFromApi();

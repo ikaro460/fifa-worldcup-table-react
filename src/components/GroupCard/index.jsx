@@ -17,8 +17,6 @@ export const GroupCard = ({ group }) => {
     });
   });
 
-  console.log(sortedArr, rows);
-
   const columns = [
     { field: "id", headerName: "Pos", type: "number" },
     { field: "Name", headerName: "Team", width: "100" },
@@ -38,22 +36,5 @@ export const GroupCard = ({ group }) => {
         disableColumnMenu
       />
     </div>
-    // <table>
-    //   <thead>
-    //     <tr>
-    //       <th>*</th>
-    //       <th>Team</th>
-    //       <th>W</th>
-    //       <th>L</th>
-    //       <th>D</th>
-    //       <th>Pts</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {sortedArr.map((team, index) => {
-    //       return <GroupTeamCard team={team} key={index} index={index} />;
-    //     })}
-    //   </tbody>
-    // </table>
   );
 };

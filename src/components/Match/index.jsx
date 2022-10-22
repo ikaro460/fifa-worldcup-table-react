@@ -73,9 +73,14 @@ export const Match = () => {
           draft.groups[groupIndex].teams[match.loser].team_stats.Losses += 1;
         });
       });
+      draft.current_round += 1;
     });
 
     setTable(newTable);
+  };
+
+  const advanceRound = () => {
+    return setTable({ ...table, current_round: table.current_round + 1 });
   };
 
   return (

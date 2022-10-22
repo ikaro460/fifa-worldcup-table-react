@@ -74,11 +74,4 @@ export const Groups = () => {
       setMounted(true);
     }
   }, [table, setTable]);
-
-  return (
-    <div>
-      <h1>Groups stage</h1>
-      <Group />
-    </div>
-  );
 };

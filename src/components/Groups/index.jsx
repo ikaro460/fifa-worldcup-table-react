@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { api } from "../../services/api";
-import { GroupsComponent } from "../GroupsComponent";
+import { Group } from "../Group";
 import { alphabet } from "../../utils/groupUtils";
 
-export const GroupsTable = () => {
+export const Groups = () => {
   const { table, setTable } = useContext(TableContext);
   const [mounted, setMounted] = useState(false);
 
@@ -82,7 +82,7 @@ export const GroupsTable = () => {
   return (
     <div>
       <h1>Groups stage</h1>
-      <GroupsComponent />
+      <Group />
     </div>
   );
 };

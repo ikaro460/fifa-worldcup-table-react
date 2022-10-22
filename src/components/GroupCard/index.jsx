@@ -6,6 +6,7 @@ export const GroupCard = ({ group }) => {
   const sortedArr = auxArr.sort((a, b) => {
     return b.team_stats.Points - a.team_stats.Points;
   });
+
   return (
     <table>
       <thead>

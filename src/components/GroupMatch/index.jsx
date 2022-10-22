@@ -2,49 +2,22 @@ import produce from "immer";
 import { useContext } from "react";
 import { MatchesContext } from "../../contexts/matchProvider";
 import { TableContext } from "../../contexts/tableProvider";
-import { matchMaking } from "../../utils/matchUtils";
+import { matchMaking } from "../../utils/groupUtils";
+import { simulateMatch } from "../../utils/matchUtils";
 
-export const Match = () => {
+export const GroupMatch = () => {
   const { table, setTable } = useContext(TableContext);
   const { matches, setMatches } = useContext(MatchesContext);
 
-  const simulateMatch = (group, team1, team2) => {
-    const scoreTeam1 = Math.floor(Math.random() * 6);
-    const scoreTeam2 = Math.floor(Math.random() * 6);
-
-    const winner =
-      scoreTeam1 > scoreTeam2
-        ? team1
-        : scoreTeam2 > scoreTeam1
-        ? team2
-        : // : Math.floor(Math.random() * 2) === 0
-          null;
-
-    const loser = winner === null ? null : winner === team1 ? team2 : team1;
-
-    const matchResults = {
-      group_id: table.groups[group].group_id,
-      team_1: team1,
-      team_2: team2,
-      scoreTeam1: scoreTeam1,
-      scoreTeam2: scoreTeam2,
-      winner: winner,
-      loser: loser,
-    };
-
-    return matchResults;
-  };
-
-  const simulateGroup = (group) => {
+  const simulateGroup = () => {
     let newGroupResults = [];
 
     for (let i = 0; i < matchMaking.length; i++) {
-      const result = simulateMatch(group, matchMaking[i][0], matchMaking[i][1]);
+      const result = simulateMatch(matchMaking[i][0], matchMaking[i][1]);
       newGroupResults.push(result);
     }
 
     return newGroupResults;
-    // updateStates(group, newMatchesResults);
   };
 
   const SimGroupStage = () => {
@@ -109,14 +82,15 @@ export const Match = () => {
     setTable(newTable);
   };
 
-  const advanceRound = () => {
-    return setTable({ ...table, current_round: table.current_round + 1 });
-  };
-
   return (
     <div>
-      <button onClick={() => simulateMatch(0, 0, 1)}>Advance Round</button>
-      <button onClick={() => SimGroupStage()}>Sim Groups</button>
+      <button
+        onClick={() => {
+          table.current_round === 0 ? SimGroupStage() : console.log("simgroup");
+        }}
+      >
+        Sim Groups
+      </button>
     </div>
   );
 };

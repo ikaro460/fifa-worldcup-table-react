@@ -27,6 +27,15 @@ export const alphabet = [
   "z",
 ];
 
+export const matchMaking = [
+  [0, 1],
+  [0, 2],
+  [0, 3],
+  [1, 2],
+  [1, 3],
+  [2, 3],
+];
+
 export const sortPosition = (arr) => {
   const sortedArr = arr.sort((a, b) => {
     if (b.team_stats.Points === a.team_stats.Points) {

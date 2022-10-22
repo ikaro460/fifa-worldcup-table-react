@@ -28,7 +28,7 @@ export const GroupCard = ({ group }) => {
   ];
 
   return (
-    <div style={{ width: "50%" }}>
+    <div style={{ width: "55%" }}>
       <DataGrid
         rows={rows}
         columns={columns}

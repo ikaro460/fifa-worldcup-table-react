@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TableContext } from "../../contexts/tableProvider";
-import { sortByPoints } from "../../utils/groupUtils";
+import { sortPosition } from "../../utils/groupUtils";
 
 export const Playoff = () => {
   const { table, setTable } = useContext(TableContext);
@@ -8,7 +8,7 @@ export const Playoff = () => {
   const auxArr = [];
 
   [...table.groups].forEach((element) => {
-    const classifiedArr = sortByPoints([...element.teams]);
+    const classifiedArr = sortPosition([...element.teams]);
     auxArr.push([classifiedArr[0], classifiedArr[1]]);
   });
 

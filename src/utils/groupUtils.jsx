@@ -27,8 +27,17 @@ export const alphabet = [
   "z",
 ];
 
-export const sortByPoints = (arr) => {
+export const sortPosition = (arr) => {
   const sortedArr = arr.sort((a, b) => {
+    if (b.team_stats.Points === a.team_stats.Points) {
+      if (b.team_stats.GD === a.team_stats.GD) {
+        //RANDOM
+        return Math.floor(Math.random() * (2 - -1) + -1);
+      }
+      //GD
+      return b.team_stats.GD - a.team_stats.GD;
+    }
+    //POINTS
     return b.team_stats.Points - a.team_stats.Points;
   });
 

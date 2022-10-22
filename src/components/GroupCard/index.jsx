@@ -1,10 +1,10 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { sortByPoints } from "../../utils/groupUtils";
+import { sortPosition } from "../../utils/groupUtils";
 
 export const GroupCard = ({ group }) => {
   const auxArr = [...group.teams];
 
-  const sortedArr = sortByPoints(auxArr);
+  const sortedArr = sortPosition(auxArr);
 
   const rows = [];
 
@@ -17,15 +17,19 @@ export const GroupCard = ({ group }) => {
   });
 
   const columns = [
-    { field: "id", headerName: "Pos", type: "number" },
-    { field: "Name", headerName: "Team", width: "100" },
-    { field: "Wins", headerName: "W", type: "number" },
-    { field: "Losses", headerName: "L", type: "number" },
-    { field: "Points", headerName: "Points", type: "number" },
+    { field: "id", headerName: "Pos", type: "number", width: 10 },
+    { field: "Name", headerName: "Team", width: 200 },
+    { field: "Wins", headerName: "W", type: "number", flex: 1 },
+    { field: "Losses", headerName: "L", type: "number", flex: 1 },
+    { field: "Draws", headerName: "D", type: "number", flex: 1 },
+    { field: "GF", headerName: "GF", type: "number", flex: 1 },
+    { field: "GA", headerName: "GA", type: "number", flex: 1 },
+    { field: "GD", headerName: "GD", type: "number", flex: 1 },
+    { field: "Points", headerName: "Points", type: "number", flex: 1 },
   ];
 
   return (
-    <div style={{ width: "55%" }}>
+    <div style={{ width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -33,6 +37,7 @@ export const GroupCard = ({ group }) => {
         rowHeight={25}
         autoHeight
         disableColumnMenu
+        DataGrid
       />
     </div>
   );

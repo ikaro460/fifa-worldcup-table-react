@@ -17,16 +17,15 @@ export const Match = () => {
         ? team1
         : scoreTeam2 > scoreTeam1
         ? team2
-        : Math.floor(Math.random() * 2) === 0
-        ? team1
-        : team2;
+        : // : Math.floor(Math.random() * 2) === 0
+          null;
 
-    const loser = winner === team1 ? team2 : team1;
+    const loser = winner === null ? null : winner === team1 ? team2 : team1;
 
     const matchResults = {
       group_id: table.groups[group].group_id,
-      team_1: table.groups[group].teams[team1].Name,
-      team_2: table.groups[group].teams[team2].Name,
+      team_1: team1,
+      team_2: team2,
       scoreTeam1: scoreTeam1,
       scoreTeam2: scoreTeam2,
       winner: winner,
@@ -68,9 +67,41 @@ export const Match = () => {
     const newTable = produce(table, (draft) => {
       newMatchesResults.forEach((group, groupIndex) => {
         group.forEach((match) => {
-          draft.groups[groupIndex].teams[match.winner].team_stats.Wins += 1;
-          draft.groups[groupIndex].teams[match.winner].team_stats.Points += 3;
-          draft.groups[groupIndex].teams[match.loser].team_stats.Losses += 1;
+          console.log(match);
+          if (match.winner === null) {
+            //IN CASE MATCH IS A DRAW
+
+            draft.groups[groupIndex].teams[match.team_1].team_stats.Draws += 1;
+            draft.groups[groupIndex].teams[match.team_2].team_stats.Draws += 1;
+            draft.groups[groupIndex].teams[match.team_1].team_stats.Points += 1;
+            draft.groups[groupIndex].teams[match.team_2].team_stats.Points += 1;
+          } else {
+            draft.groups[groupIndex].teams[match.winner].team_stats.Wins += 1;
+            draft.groups[groupIndex].teams[match.loser].team_stats.Losses += 1;
+            draft.groups[groupIndex].teams[match.winner].team_stats.Points += 3;
+          }
+
+          //SCORE STATS
+          //GF
+          draft.groups[groupIndex].teams[match.team_1].team_stats.GF +=
+            match.scoreTeam1;
+          draft.groups[groupIndex].teams[match.team_2].team_stats.GF +=
+            match.scoreTeam2;
+
+          //GA
+          draft.groups[groupIndex].teams[match.team_1].team_stats.GA +=
+            match.scoreTeam2;
+          draft.groups[groupIndex].teams[match.team_2].team_stats.GA +=
+            match.scoreTeam1;
+
+          //GD
+          //CALCULATE GD
+          const GD_1 = match.scoreTeam1 - match.scoreTeam2;
+          const GD_2 = match.scoreTeam2 - match.scoreTeam1;
+
+          //SET GD
+          draft.groups[groupIndex].teams[match.team_1].team_stats.GD += GD_1;
+          draft.groups[groupIndex].teams[match.team_2].team_stats.GD += GD_2;
         });
       });
       draft.current_round += 1;

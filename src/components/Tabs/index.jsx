@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { Groups } from "../Groups";
+import { Playoff } from "../Playoff";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +62,7 @@ export const BasicTabs = () => {
         <Groups />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Playoffs
+        <Playoff />
       </TabPanel>
     </Box>
   );

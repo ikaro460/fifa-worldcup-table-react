@@ -26,3 +26,11 @@ export const alphabet = [
   "y",
   "z",
 ];
+
+export const sortByPoints = (arr) => {
+  const sortedArr = arr.sort((a, b) => {
+    return b.team_stats.Points - a.team_stats.Points;
+  });
+
+  return sortedArr;
+};

@@ -1,11 +1,10 @@
 import { DataGrid } from "@mui/x-data-grid";
+import { sortByPoints } from "../../utils/groupUtils";
 
 export const GroupCard = ({ group }) => {
   const auxArr = [...group.teams];
 
-  const sortedArr = auxArr.sort((a, b) => {
-    return b.team_stats.Points - a.team_stats.Points;
-  });
+  const sortedArr = sortByPoints(auxArr);
 
   const rows = [];
 

@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
 import { Groups } from "./components/Groups";
-import { Match } from "./components/Match";
+import { GroupMatch } from "./components/GroupMatch";
+import { Playoff } from "./components/Playoff";
 import { BasicTabs } from "./components/Tabs";
 import { MatchesContext } from "./contexts/matchProvider";
 import { TableContext } from "./contexts/tableProvider";
@@ -19,8 +20,9 @@ function App() {
       <button onClick={() => console.log(table, matches)}>
         Show table on console
       </button>
-      <Match />
+      <GroupMatch />
       <Groups />
+      <Playoff />
       <BasicTabs />
     </div>
   );

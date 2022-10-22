@@ -3,11 +3,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { Groups } from "../Groups";
-import { Playoff } from "../Playoff";
 import { Group } from "../Group";
+import { PlayoffTable } from "../PlayoffTable";
 
-function TabPanel(props) {
+export const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -25,7 +24,7 @@ function TabPanel(props) {
       )}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -33,12 +32,12 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+export const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 
 export const BasicTabs = () => {
   const [value, setValue] = useState(0);
@@ -63,7 +62,7 @@ export const BasicTabs = () => {
         <Group />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Playoff />
+        <PlayoffTable />
       </TabPanel>
     </Box>
   );

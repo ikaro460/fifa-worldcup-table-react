@@ -1,17 +1,25 @@
-export const matchMaking = [
-  [0, 1],
-  [0, 2],
-  [0, 3],
-  [1, 2],
-  [1, 3],
-  [2, 3],
-];
+export const simulateMatch = (team1, team2) => {
+  const scoreTeam1 = Math.floor(Math.random() * 6);
+  const scoreTeam2 = Math.floor(Math.random() * 6);
 
-export const playoffMatchMaking = [
-  [0, 1],
-  [0, 2],
-  [0, 3],
-  [1, 2],
-  [1, 3],
-  [2, 3],
-];
+  const winner =
+    scoreTeam1 > scoreTeam2
+      ? team1
+      : scoreTeam2 > scoreTeam1
+      ? team2
+      : // : Math.floor(Math.random() * 2) === 0
+        null;
+
+  const loser = winner === null ? null : winner === team1 ? team2 : team1;
+
+  const matchResults = {
+    team_1: team1,
+    team_2: team2,
+    scoreTeam1: scoreTeam1,
+    scoreTeam2: scoreTeam2,
+    winner: winner,
+    loser: loser,
+  };
+
+  return matchResults;
+};

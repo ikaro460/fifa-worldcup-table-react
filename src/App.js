@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
-import { Groups } from "./components/Groups";
 import { Match } from "./components/Match";
 import { BasicTabs } from "./components/Tabs";
 import { MatchesContext } from "./contexts/matchProvider";

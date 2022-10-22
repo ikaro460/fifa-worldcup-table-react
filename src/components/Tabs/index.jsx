@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { Groups } from "../Groups";
@@ -19,7 +18,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -55,14 +54,14 @@ export const BasicTabs = () => {
           aria-label="basic tabs example"
         >
           <Tab label="Groups" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label="Playoffs" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <Groups />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        Playoffs
       </TabPanel>
     </Box>
   );

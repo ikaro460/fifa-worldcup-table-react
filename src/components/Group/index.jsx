@@ -11,7 +11,7 @@ export const Group = () => {
       {table.groups.map((group, index) => {
         return (
           <div key={index}>
-            <h1>Group {alphabet[index]}</h1>
+            <h2>Group {alphabet[index].toUpperCase()}</h2>
             <GroupCard group={group} />
           </div>
         );

@@ -67,7 +67,6 @@ export const Match = () => {
     const newTable = produce(table, (draft) => {
       newMatchesResults.forEach((group, groupIndex) => {
         group.forEach((match) => {
-          console.log(match);
           if (match.winner === null) {
             //IN CASE MATCH IS A DRAW
 

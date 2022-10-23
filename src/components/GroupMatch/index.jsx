@@ -4,6 +4,7 @@ import { MatchesContext } from "../../contexts/matchProvider";
 import { TableContext } from "../../contexts/tableProvider";
 import { matchMaking } from "../../utils/groupUtils";
 import { simulateMatch } from "../../utils/matchUtils";
+import Button from "@mui/material/Button";
 
 export const GroupMatch = () => {
   const { table, setTable } = useContext(TableContext);
@@ -84,13 +85,15 @@ export const GroupMatch = () => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           table.current_round === 0 ? SimGroupStage() : console.log("simgroup");
         }}
+        variant="contained"
+        disabled={table.current_round === 0 ? false : true}
       >
         Sim Groups
-      </button>
+      </Button>
     </div>
   );
 };

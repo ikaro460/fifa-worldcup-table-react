@@ -2,6 +2,7 @@ import produce from "immer";
 import React, { useContext } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { simulateMatch } from "../../utils/matchUtils";
+import Button from "@mui/material/Button";
 
 export const PlayoffTable = () => {
   const { table, setTable } = useContext(TableContext);
@@ -111,9 +112,13 @@ export const PlayoffTable = () => {
     <div>
       <div>
         <h2>Eights</h2>
-        <button onClick={() => simulatRound([...table.playoff.eights])}>
-          Sim Eights
-        </button>
+        <Button
+          onClick={() => simulatRound([...table.playoff.eights])}
+          variant="contained"
+          disabled={table.current_round === 1 ? false : true}
+        >
+          Simulate Eights
+        </Button>
         {table.playoff.eights.map((match, index) => {
           return (
             <div key={index}>
@@ -133,9 +138,13 @@ export const PlayoffTable = () => {
       </div>
       <div>
         <h2>Quarters</h2>
-        <button onClick={() => simulatRound([...table.playoff.quarters])}>
-          Sim quarters
-        </button>
+        <Button
+          onClick={() => simulatRound([...table.playoff.quarters])}
+          variant="contained"
+          disabled={table.current_round === 2 ? false : true}
+        >
+          Simulate Quarters
+        </Button>
         {table.playoff.quarters.map((match, index) => {
           return (
             <div key={index}>
@@ -155,9 +164,13 @@ export const PlayoffTable = () => {
       </div>
       <div>
         <h2>Semis</h2>
-        <button onClick={() => simulatRound([...table.playoff.semis])}>
-          Sim semis
-        </button>
+        <Button
+          onClick={() => simulatRound([...table.playoff.semis])}
+          variant="contained"
+          disabled={table.current_round === 3 ? false : true}
+        >
+          Simulate Semis
+        </Button>
         {table.playoff.semis.map((match, index) => {
           return (
             <div key={index}>
@@ -177,9 +190,13 @@ export const PlayoffTable = () => {
       </div>
       <div>
         <h2>Final</h2>
-        <button onClick={() => simulatRound([{ ...table.playoff.final }])}>
-          Sim final
-        </button>
+        <Button
+          onClick={() => simulatRound([{ ...table.playoff.final }])}
+          variant="contained"
+          disabled={table.current_round === 4 ? false : true}
+        >
+          Simulate Final
+        </Button>
         <div>
           {table.playoff.final.team1.Name}{" "}
           {table.playoff.final.result

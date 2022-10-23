@@ -8,18 +8,8 @@ import { MatchesContext } from "./contexts/matchProvider";
 import { TableContext } from "./contexts/tableProvider";
 
 function App() {
-  const { table } = useContext(TableContext);
-  const { matches } = useContext(MatchesContext);
-
-  useEffect(() => {
-    console.log(matches);
-  }, [matches]);
-
   return (
     <div className="App">
-      <button onClick={() => console.log(table, matches)}>
-        Show table on console
-      </button>
       <GroupMatch />
       <Groups />
       <Playoff />

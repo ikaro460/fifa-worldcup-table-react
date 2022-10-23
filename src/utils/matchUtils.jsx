@@ -1,4 +1,4 @@
-export const simulateMatch = (team1, team2) => {
+export const simulateMatch = (team1, team2, currentRound) => {
   const scoreTeam1 = Math.floor(Math.random() * 6);
   const scoreTeam2 = Math.floor(Math.random() * 6);
 
@@ -7,8 +7,11 @@ export const simulateMatch = (team1, team2) => {
       ? team1
       : scoreTeam2 > scoreTeam1
       ? team2
-      : // : Math.floor(Math.random() * 2) === 0
-        null;
+      : currentRound > 0
+      ? Math.floor(Math.random() * 2) === 0
+        ? team1
+        : team2
+      : null;
 
   const loser = winner === null ? null : winner === team1 ? team2 : team1;
 

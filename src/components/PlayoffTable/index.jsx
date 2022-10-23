@@ -2,6 +2,8 @@ import produce from "immer";
 import React, { useContext } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { simulateMatch } from "../../utils/matchUtils";
+import Button from "@mui/material/Button";
+import { StyledContainer } from "./styles";
 
 export const PlayoffTable = () => {
   const { table, setTable } = useContext(TableContext);
@@ -109,11 +111,15 @@ export const PlayoffTable = () => {
 
   return (
     <div>
-      <div>
-        <h2>Eights</h2>
-        <button onClick={() => simulatRound([...table.playoff.eights])}>
-          Sim Eights
-        </button>
+      <h2>Eights</h2>
+      <Button
+        onClick={() => simulatRound([...table.playoff.eights])}
+        variant="contained"
+        disabled={table.current_round === 1 ? false : true}
+      >
+        Simulate Eights
+      </Button>
+      <StyledContainer>
         {table.playoff.eights.map((match, index) => {
           return (
             <div key={index}>
@@ -130,75 +136,99 @@ export const PlayoffTable = () => {
             </div>
           );
         })}
-      </div>
+      </StyledContainer>
       <div>
         <h2>Quarters</h2>
-        <button onClick={() => simulatRound([...table.playoff.quarters])}>
-          Sim quarters
-        </button>
-        {table.playoff.quarters.map((match, index) => {
-          return (
-            <div key={index}>
-              <h4>Match {index + 1}</h4>
-              <div>
-                {match.team1.Name}{" "}
-                {match.result ? match.result.scoreTeam1 : "*"}
+        <Button
+          onClick={() => simulatRound([...table.playoff.quarters])}
+          variant="contained"
+          disabled={table.current_round === 2 ? false : true}
+        >
+          Simulate Quarters
+        </Button>
+        <StyledContainer>
+          {table.playoff.quarters.map((match, index) => {
+            return (
+              <div key={index}>
+                <h4>Match {index + 1}</h4>
+                <div>
+                  {match.team1.Name}{" "}
+                  {match.result ? match.result.scoreTeam1 : "*"}
+                </div>
+                <span>X</span>
+                <div>
+                  {match.team2.Name}{" "}
+                  {match.result ? match.result.scoreTeam2 : "*"}
+                </div>
               </div>
-              <span>X</span>
-              <div>
-                {match.team2.Name}{" "}
-                {match.result ? match.result.scoreTeam2 : "*"}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </StyledContainer>
       </div>
       <div>
         <h2>Semis</h2>
-        <button onClick={() => simulatRound([...table.playoff.semis])}>
-          Sim semis
-        </button>
-        {table.playoff.semis.map((match, index) => {
-          return (
-            <div key={index}>
-              <h4>Match {index + 1}</h4>
-              <div>
-                {match.team1.Name}{" "}
-                {match.result ? match.result.scoreTeam1 : "*"}
+        <Button
+          onClick={() => simulatRound([...table.playoff.semis])}
+          variant="contained"
+          disabled={table.current_round === 3 ? false : true}
+        >
+          Simulate Semis
+        </Button>
+        <StyledContainer>
+          {table.playoff.semis.map((match, index) => {
+            return (
+              <div key={index}>
+                <h4>Match {index + 1}</h4>
+                <div>
+                  {match.team1.Name}{" "}
+                  {match.result ? match.result.scoreTeam1 : "*"}
+                </div>
+                <span>X</span>
+                <div>
+                  {match.team2.Name}{" "}
+                  {match.result ? match.result.scoreTeam2 : "*"}
+                </div>
               </div>
-              <span>X</span>
-              <div>
-                {match.team2.Name}{" "}
-                {match.result ? match.result.scoreTeam2 : "*"}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </StyledContainer>
       </div>
       <div>
         <h2>Final</h2>
-        <button onClick={() => simulatRound([{ ...table.playoff.final }])}>
-          Sim final
-        </button>
-        <div>
-          {table.playoff.final.team1.Name}{" "}
-          {table.playoff.final.result
-            ? table.playoff.final.result.scoreTeam1
-            : "*"}
-        </div>
-        <span>X</span>
-        <div>
-          {table.playoff.final.team2.Name}{" "}
-          {table.playoff.final.result
-            ? table.playoff.final.result.scoreTeam2
-            : "*"}
-        </div>
+        <Button
+          onClick={() => simulatRound([{ ...table.playoff.final }])}
+          variant="contained"
+          disabled={table.current_round === 4 ? false : true}
+        >
+          Simulate Final
+        </Button>
+        <StyledContainer>
+          <div>
+            <div>
+              {table.playoff.final.team1.Name}{" "}
+              {table.playoff.final.result
+                ? table.playoff.final.result.scoreTeam1
+                : "*"}
+            </div>
+            <span>X</span>
+            <div>
+              {table.playoff.final.team2.Name}{" "}
+              {table.playoff.final.result
+                ? table.playoff.final.result.scoreTeam2
+                : "*"}
+            </div>
+          </div>
+        </StyledContainer>
       </div>
       <div>
         <h1>Winner</h1>
-        {table.current_round === 5
-          ? table.playoff.final.result.winner.Name
-          : "Undefined"}
+        <StyledContainer>
+          <p>
+            {table.current_round === 5
+              ? table.playoff.final.result.winner.Name
+              : "Undefined"}
+          </p>
+        </StyledContainer>
       </div>
     </div>
   );

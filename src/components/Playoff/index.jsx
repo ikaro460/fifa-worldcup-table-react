@@ -25,9 +25,6 @@ export const Playoff = () => {
     const tableEights = produce(table, (draft) => {
       draft.playoff.eights = sortedEights;
     });
-
-    console.log(tableEights);
-
     setTable(tableEights);
   };
 

@@ -31,6 +31,10 @@ export const GroupCard = ({ group }) => {
   return (
     <div style={{ width: "100%" }}>
       <DataGrid
+        sx={{
+          backgroundColor: "rgba(0,0,0, 0.3)",
+          color: "#fff",
+        }}
         rows={rows}
         columns={columns}
         hideFooter

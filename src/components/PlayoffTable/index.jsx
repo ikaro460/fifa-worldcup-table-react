@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { TableContext } from "../../contexts/tableProvider";
 import { simulateMatch } from "../../utils/matchUtils";
 import Button from "@mui/material/Button";
+import { StyledContainer } from "./styles";
 
 export const PlayoffTable = () => {
   const { table, setTable } = useContext(TableContext);
@@ -110,15 +111,15 @@ export const PlayoffTable = () => {
 
   return (
     <div>
-      <div>
-        <h2>Eights</h2>
-        <Button
-          onClick={() => simulatRound([...table.playoff.eights])}
-          variant="contained"
-          disabled={table.current_round === 1 ? false : true}
-        >
-          Simulate Eights
-        </Button>
+      <h2>Eights</h2>
+      <Button
+        onClick={() => simulatRound([...table.playoff.eights])}
+        variant="contained"
+        disabled={table.current_round === 1 ? false : true}
+      >
+        Simulate Eights
+      </Button>
+      <StyledContainer>
         {table.playoff.eights.map((match, index) => {
           return (
             <div key={index}>
@@ -135,7 +136,7 @@ export const PlayoffTable = () => {
             </div>
           );
         })}
-      </div>
+      </StyledContainer>
       <div>
         <h2>Quarters</h2>
         <Button
@@ -145,22 +146,24 @@ export const PlayoffTable = () => {
         >
           Simulate Quarters
         </Button>
-        {table.playoff.quarters.map((match, index) => {
-          return (
-            <div key={index}>
-              <h4>Match {index + 1}</h4>
-              <div>
-                {match.team1.Name}{" "}
-                {match.result ? match.result.scoreTeam1 : "*"}
+        <StyledContainer>
+          {table.playoff.quarters.map((match, index) => {
+            return (
+              <div key={index}>
+                <h4>Match {index + 1}</h4>
+                <div>
+                  {match.team1.Name}{" "}
+                  {match.result ? match.result.scoreTeam1 : "*"}
+                </div>
+                <span>X</span>
+                <div>
+                  {match.team2.Name}{" "}
+                  {match.result ? match.result.scoreTeam2 : "*"}
+                </div>
               </div>
-              <span>X</span>
-              <div>
-                {match.team2.Name}{" "}
-                {match.result ? match.result.scoreTeam2 : "*"}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </StyledContainer>
       </div>
       <div>
         <h2>Semis</h2>
@@ -171,22 +174,24 @@ export const PlayoffTable = () => {
         >
           Simulate Semis
         </Button>
-        {table.playoff.semis.map((match, index) => {
-          return (
-            <div key={index}>
-              <h4>Match {index + 1}</h4>
-              <div>
-                {match.team1.Name}{" "}
-                {match.result ? match.result.scoreTeam1 : "*"}
+        <StyledContainer>
+          {table.playoff.semis.map((match, index) => {
+            return (
+              <div key={index}>
+                <h4>Match {index + 1}</h4>
+                <div>
+                  {match.team1.Name}{" "}
+                  {match.result ? match.result.scoreTeam1 : "*"}
+                </div>
+                <span>X</span>
+                <div>
+                  {match.team2.Name}{" "}
+                  {match.result ? match.result.scoreTeam2 : "*"}
+                </div>
               </div>
-              <span>X</span>
-              <div>
-                {match.team2.Name}{" "}
-                {match.result ? match.result.scoreTeam2 : "*"}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </StyledContainer>
       </div>
       <div>
         <h2>Final</h2>
@@ -197,25 +202,33 @@ export const PlayoffTable = () => {
         >
           Simulate Final
         </Button>
-        <div>
-          {table.playoff.final.team1.Name}{" "}
-          {table.playoff.final.result
-            ? table.playoff.final.result.scoreTeam1
-            : "*"}
-        </div>
-        <span>X</span>
-        <div>
-          {table.playoff.final.team2.Name}{" "}
-          {table.playoff.final.result
-            ? table.playoff.final.result.scoreTeam2
-            : "*"}
-        </div>
+        <StyledContainer>
+          <div>
+            <div>
+              {table.playoff.final.team1.Name}{" "}
+              {table.playoff.final.result
+                ? table.playoff.final.result.scoreTeam1
+                : "*"}
+            </div>
+            <span>X</span>
+            <div>
+              {table.playoff.final.team2.Name}{" "}
+              {table.playoff.final.result
+                ? table.playoff.final.result.scoreTeam2
+                : "*"}
+            </div>
+          </div>
+        </StyledContainer>
       </div>
       <div>
         <h1>Winner</h1>
-        {table.current_round === 5
-          ? table.playoff.final.result.winner.Name
-          : "Undefined"}
+        <StyledContainer>
+          <p>
+            {table.current_round === 5
+              ? table.playoff.final.result.winner.Name
+              : "Undefined"}
+          </p>
+        </StyledContainer>
       </div>
     </div>
   );

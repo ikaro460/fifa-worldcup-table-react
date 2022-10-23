@@ -1,11 +1,9 @@
-import { useContext, useEffect } from "react";
 import "./App.css";
 import { Groups } from "./components/Groups";
 import { GroupMatch } from "./components/GroupMatch";
 import { Playoff } from "./components/Playoff";
 import { BasicTabs } from "./components/Tabs";
-import { MatchesContext } from "./contexts/matchProvider";
-import { TableContext } from "./contexts/tableProvider";
+import GlobalStyle from "./styles/global";
 
 function App() {
   return (
@@ -14,6 +12,7 @@ function App() {
       <Groups />
       <Playoff />
       <BasicTabs />
+      <GlobalStyle />
     </div>
   );
 }
